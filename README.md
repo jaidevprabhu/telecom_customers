@@ -3,7 +3,7 @@
 The data provided contains information on customers purchasing and useage behavior with the telecom products. 
 
 
-```python
+```{python, echo=FALSE}
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.decomposition import PCA
@@ -26,8 +26,7 @@ print(df.info())
 
 ## Columns to drop
 
-
-  We are  we will exclude these from the clustering analysis.
+  We will exclude these features from the clustering analysis.
 
   - '**Customer ID**' (irrelevant to consideration here)
   - '**Referred a Friend**' : already captured in 'Number of referrals'
@@ -48,33 +47,7 @@ cols_to_drop = ['Customer ID', 'Referred a Friend', 'Under 30', \
                 'Churn Value','CLTV', ]
 df_pca_cluster = df.drop(cols_to_drop, axis = 1, inplace = True)
 ```
+We will convert the remaining object columns to numeric using one-hot encoding. Then, we will standardize the data and apply PCA to reduce dimensionality. Finally, we will use K-Means clustering to segment the customers.
 
+Given that the data appears to be on the customer-level, and we are looking to segment customers into groups, we will not be using any sampling methods.
 
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
-
-
-```python
-
-```
