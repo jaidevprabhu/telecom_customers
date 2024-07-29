@@ -102,7 +102,7 @@ for i in range(1, 11):
     inertia.append(kmeans.inertia_)
 ```
 
- ![Elbow Plot](/images/scree_chart.png)
+ ![Elbow Plot](/images/elbow_chart.png)
 
  The elbow method plot provides a visual way to assess the optimal number of clusters. The plot shows a bend or elbow at **k=3**, where the rate of decrease in inertia starts to slow down. This suggests that adding more clusters beyond 3 does not significantly improve the compactness of the clusters.
 
@@ -130,3 +130,40 @@ print(cluster_means.to_markdown(numalign="left", stralign="center"))
 | 1         | 3.29                  | 55.81              | 25.2                                | 28.77                     | 90.15            | 5015.53                 | 2.37            | 672.66                     | 1379.97                       | 46.61 | 0.57                   | 1.06                          | 0.2                               | 0.94                | 0.69                 | 1                      | 0.57                  | 0.68                | 0.7                          | 0.59                       | 0.72               | 0.74                   | 0.67                  | 0.54                 | 0.33                | 0.46                | 0.67                    | 0.38                         | 0.02                          | 0.51          | 0.74          |
 | 2         | 0.76                  | 16.41              | 20.39                               | 25.89                     | 69.99            | 1114.09                 | 1.79            | 131.94                     | 287.1                         | 48.26 | 0.23                   | 1.73                          | 0.47                              | 0.84                | 0.34                 | 1                      | 0.22                  | 0.28                | 0.26                         | 0.22                       | 0.34               | 0.34                   | 0.31                  | 0.46                 | 0.13                | 0.06                | 0.7                     | 0.28                         | 0.06                          | 0.5           | 0.28          |
 ```
+
+![Cluster Segmentation illustrated] (images/Customer_Segmentation.png)
+
+
+### Conclusions
+
+**Cluster 0: Newer Customers with Low Usage**
+
+  - These customers have been with the company for a shorter duration.
+  - They have low average monthly long distance charges and GB download.
+  - They rarely have multiple lines or premium tech support.
+  - They are less likely to have streaming services or unlimited data.
+  - They are more likely to be on month-to-month contracts.
+
+**Cluster 1: Moderate Tenure, Moderate Usage**
+
+  - These customers have a moderate tenure with the company.
+  - They have moderate usage of long distance and data services.
+  - They are more likely to have internet service, but less likely to have additional features like online security or device protection.
+  - They are mostly on month-to-month contracts.
+
+**Cluster 2: Long-Term Customers with High Usage**
+
+  - These customers have been with the company for the longest time.
+  - They have the highest usage of long distance andata services.
+  - They are more likely to have multiple lines, premium tech support, and staming services.
+  - They are more likely to have unlimited data and be on longer-term contracts.
+
+
+### Summary
+
+<p> 
+These clusters provide a good starting point for understanding the different customer segments within the telecom company's customer base. The company could use this information to tailor marketing strategies, customer service approaches, or product offerings to better meet the needs of each segment.
+</p>
+
+
+
