@@ -69,3 +69,64 @@ encoded_data = encoder.fit_transform(df_pca_cluster[obj_cols])
 encoded_df = pd.DataFrame(encoded_data, columns=encoder.get_feature_names_out(obj_cols))
 ```
 
+### Standardize the data and apply PCA to reduce dimensionality
+
+```python
+scaler = StandardScaler()
+scaled_data = scaler.fit_transform(df_pca_cluster)
+
+pca_all = PCA()
+pca_all.fit(scaled_data)
+```
+
+### Chart a scree plot to review the variance
+
+ ![Scree plot](/images/scree_plot.png)
+
+From this scree plot we notice that **2 PCA components** are adequate to capture the variance of the dataset. We xplain this further in the notebook.
+
+```python
+# Apply PCA to reduce the number of dimensions to 2
+pca = PCA(n_components=2)
+pca_result = pca.fit_transform(scaled_data)
+```
+
+### Now, for clustering using KMeans
+
+```python
+# Find the optimal number of clusters using the elbow method
+inertia = []
+for i in range(1, 11):
+    kmeans = KMeans(n_clusters=i, n_init = 10, random_state=42)
+    kmeans.fit(pca_result)
+    inertia.append(kmeans.inertia_)
+```
+
+ ![Elbow Plot](/images/scree_chart.png)
+
+ The elbow method plot provides a visual way to assess the optimal number of clusters. The plot shows a bend or elbow at **k=3**, where the rate of decrease in inertia starts to slow down. This suggests that adding more clusters beyond 3 does not significantly improve the compactness of the clusters.
+
+```python
+# Apply K-means clustering with the optimal number of clusters
+optimal_k = 3  
+kmeans = KMeans(
+    n_clusters=optimal_k, 
+    n_init = 10, # To get rid of a pesky future warning
+    random_state=42
+)
+cluster_labels = kmeans.fit_predict(pca_result)
+df_pca_cluster['Cluster'] = cluster_labels
+```
+
+Here's a summary of the average characteristics of each cluster:
+ 
+```python
+# Print the results
+print(cluster_means.to_markdown(numalign="left", stralign="center"))
+
+| Cluster   | Number of Referrals   | Tenure in Months   | Avg Monthly Long Distance Charges   | Avg Monthly GB Download   | Monthly Charge   | Total Regular Charges   | Total Refunds   | Total Extra Data Charges   | Total Long Distance Charges   | Age   | Number of Dependents   | Total Customer Svc Requests   | Product/Service Issues Reported   | Phone Service_Yes   | Multiple Lines_Yes   | Internet Service_Yes   | Online Security_Yes   | Online Backup_Yes   | Device Protection Plan_Yes   | Premium Tech Support_Yes   | Streaming TV_Yes   | Streaming Movies_Yes   | Streaming Music_Yes   | Unlimited Data_Yes   | Contract_One Year   | Contract_Two Year   | Paperless Billing_Yes   | Payment Method_Credit Card   | Payment Method_Mailed Check   | Gender_Male   | Married_Yes   |
+|:----------|:----------------------|:-------------------|:------------------------------------|:--------------------------|:-----------------|:------------------------|:----------------|:---------------------------|:------------------------------|:------|:-----------------------|:------------------------------|:----------------------------------|:--------------------|:---------------------|:-----------------------|:----------------------|:--------------------|:-----------------------------|:---------------------------|:-------------------|:-----------------------|:----------------------|:---------------------|:--------------------|:--------------------|:------------------------|:-----------------------------|:------------------------------|:--------------|:--------------|
+| 0         | 2.36                  | 30.14              | 24.69                               | 1.58                      | 23.29            | 704.91                  | 1.73            | 11.04                      | 748.25                        | 43.09 | 0.78                   | 0.98                          | 0.15                              | 0.98                | 0.21                 | 0.08                   | 0.03                  | 0.02                | 0.01                         | 0.02                       | 0                  | 0                      | 0                     | 0.02                 | 0.24                | 0.4                 | 0.29                    | 0.61                         | 0.09                          | 0.51          | 0.51          |
+| 1         | 3.29                  | 55.81              | 25.2                                | 28.77                     | 90.15            | 5015.53                 | 2.37            | 672.66                     | 1379.97                       | 46.61 | 0.57                   | 1.06                          | 0.2                               | 0.94                | 0.69                 | 1                      | 0.57                  | 0.68                | 0.7                          | 0.59                       | 0.72               | 0.74                   | 0.67                  | 0.54                 | 0.33                | 0.46                | 0.67                    | 0.38                         | 0.02                          | 0.51          | 0.74          |
+| 2         | 0.76                  | 16.41              | 20.39                               | 25.89                     | 69.99            | 1114.09                 | 1.79            | 131.94                     | 287.1                         | 48.26 | 0.23                   | 1.73                          | 0.47                              | 0.84                | 0.34                 | 1                      | 0.22                  | 0.28                | 0.26                         | 0.22                       | 0.34               | 0.34                   | 0.31                  | 0.46                 | 0.13                | 0.06                | 0.7                     | 0.28                         | 0.06                          | 0.5           | 0.28          |
+```
