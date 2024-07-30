@@ -7,7 +7,7 @@ The data provided contains information on customers' purchasing and usage behavi
 df = pd.read_csv('data/telco_churn_data.csv')
 
 # Display the first 5 rows
-print(df.head().to_markdown(index=False, numalign="left", stralign="center"))
+print(df.head().to_markdown(index=False, numalign="center", stralign="center"))
 
 |  Customer ID  |  Referred a Friend  | Number of Referrals   | Tenure in Months   |  Offer  |  Phone Service  | Avg Monthly Long Distance Charges   |  Multiple Lines  |  Internet Service  |  Internet Type  | Avg Monthly GB Download   |  Online Security  |  Online Backup  |  Device Protection Plan  |  Premium Tech Support  |  Streaming TV  |  Streaming Movies  |  Streaming Music  |  Unlimited Data  |    Contract    |  Paperless Billing  |  Payment Method  | Monthly Charge   | Total Regular Charges   | Total Refunds   | Total Extra Data Charges   | Total Long Distance Charges   |  Gender  | Age   |  Under 30  |  Senior Citizen  |  Married  |  Dependents  | Number of Dependents   |    City     | Zip Code   | Latitude   | Longitude   | Population   | Churn Value   | CLTV   |  Churn Category  |         Churn Reason         | Total Customer Svc Requests   | Product/Service Issues Reported   | Customer Satisfaction   |
 |:-------------:|:-------------------:|:----------------------|:-------------------|:-------:|:---------------:|:------------------------------------|:----------------:|:------------------:|:---------------:|:--------------------------|:-----------------:|:---------------:|:------------------------:|:----------------------:|:--------------:|:------------------:|:-----------------:|:----------------:|:--------------:|:-------------------:|:----------------:|:-----------------|:------------------------|:----------------|:---------------------------|:------------------------------|:--------:|:------|:----------:|:----------------:|:---------:|:------------:|:-----------------------|:-----------:|:-----------|:-----------|:------------|:-------------|:--------------|:-------|:----------------:|:----------------------------:|:------------------------------|:----------------------------------|:------------------------|
@@ -81,7 +81,7 @@ pca_all.fit(scaled_data)
 
  ![Scree plot](/images/scree_plot.png)
 
-From this scree plot we notice that **2 PCA components** are adequate to capture the variance of the dataset. We xplain this further in the notebook.
+From this scree plot we notice that **2 PCA components** are adequate to capture the variance of the dataset. We explain this further in the notebook.
 
 ```python
 # Apply PCA to reduce the number of dimensions to 2
@@ -120,40 +120,19 @@ Here's a summary of the average characteristics of each cluster:
  
 ```python
 # Print the results
-print(cluster_means.to_markdown(numalign="left", stralign="center"))
+print(cluster_means.to_markdown(numalign="center", stralign="center"))
 
 |  Cluster  |  Number of Referrals  |  Tenure in Months  |  Avg Monthly Long Distance Charges  |  Avg Monthly GB Download  |  Monthly Charge  |  Total Regular Charges  |  Total Refunds  |  Total Extra Data Charges  |  Total Long Distance Charges  |  Age  |  Number of Dependents  |  Total Customer Svc Requests  |  Product/Service Issues Reported  |  Phone Service_Yes  |  Multiple Lines_Yes  |  Internet Service_Yes  |  Online Security_Yes  |  Online Backup_Yes  |  Device Protection Plan_Yes  |  Premium Tech Support_Yes  |  Streaming TV_Yes  |  Streaming Movies_Yes  |  Streaming Music_Yes  |  Unlimited Data_Yes  |  Contract_One Year  |  Contract_Two Year  |  Paperless Billing_Yes  |  Payment Method_Credit Card  |  Payment Method_Mailed Check  |  Gender_Male  |  Married_Yes  |
 |:---------:|:---------------------:|:------------------:|:-----------------------------------:|:-------------------------:|:----------------:|:-----------------------:|:---------------:|:--------------------------:|:-----------------------------:|:-----:|:----------------------:|:-----------------------------:|:---------------------------------:|:-------------------:|:--------------------:|:----------------------:|:---------------------:|:-------------------:|:----------------------------:|:--------------------------:|:------------------:|:----------------------:|:---------------------:|:--------------------:|:-------------------:|:-------------------:|:-----------------------:|:----------------------------:|:-----------------------------:|:-------------:|:-------------:|
-|     0     |         3.27          |       55.87        |                25.35                |           28.65           |      90.45       |         5032.78         |      2.38       |           673.14           |            1387.05            | 46.78 |          0.56          |             1.07              |                0.2                |        0.94         |         0.69         |           1            |         0.56          |        0.68         |             0.7              |            0.59            |        0.72        |          0.74          |         0.67          |         0.54         |        0.33         |        0.45         |          0.67           |             0.38             |             0.02              |     0.51      |     0.74      |
-|     1     |         0.83          |       16.55        |                20.07                |           25.93           |      69.38       |         1105.61         |      1.81       |           132.41           |            279.55             | 48.08 |          0.25          |             1.71              |               0.46                |        0.83         |         0.33         |           1            |         0.23          |        0.28         |             0.26             |            0.22            |        0.34        |          0.33          |         0.31          |         0.46         |        0.13         |        0.06         |          0.69           |             0.29             |             0.06              |      0.5      |     0.29      |
-|     2     |         2.31          |       30.34        |                25.26                |           0.94            |      22.72       |         699.29          |      1.68       |            7.77            |            771.26             | 43.05 |          0.76          |               1               |               0.16                |          1          |         0.22         |          0.05          |         0.01          |        0.01         |              0               |            0.01            |         0          |           0            |           0           |         0.02         |        0.24         |        0.41         |          0.29           |             0.61             |             0.09              |     0.51      |      0.5      |
+|     0     |         2.36          |       30.14        |                24.69                |           1.58            |      23.29       |         704.91          |      1.73       |           11.04            |            748.25             | 43.09 |          0.78          |             0.98              |               0.15                |        0.98         |         0.21         |          0.08          |         0.03          |        0.02         |             0.01             |            0.02            |         0          |           0            |           0           |         0.02         |        0.24         |         0.4         |          0.29           |             0.61             |             0.09              |     0.51      |     0.51      |
+|     1     |         3.29          |       55.81        |                25.2                 |           28.77           |      90.15       |         5015.53         |      2.37       |           672.66           |            1379.97            | 46.61 |          0.57          |             1.06              |                0.2                |        0.94         |         0.69         |           1            |         0.57          |        0.68         |             0.7              |            0.59            |        0.72        |          0.74          |         0.67          |         0.54         |        0.33         |        0.46         |          0.67           |             0.38             |             0.02              |     0.51      |     0.74      |
+|     2     |         0.76          |       16.41        |                20.39                |           25.89           |      69.99       |         1114.09         |      1.79       |           131.94           |             287.1             | 48.26 |          0.23          |             1.73              |               0.47                |        0.84         |         0.34         |           1            |         0.22          |        0.28         |             0.26             |            0.22            |        0.34        |          0.34          |         0.31          |         0.46         |        0.13         |        0.06         |           0.7           |             0.28             |             0.06              |      0.5      |     0.28      |
 ```
 ![Cluster Segmentation illustrated](/images/Customer_Segmentation.png)
 
 
 ### Conclusions
 
-**Cluster 0: Basic User**
-
-  - Average Monthly Charges: Lower compared to other clusters.
-  - Tenure: Shorter tenure in months.
-  - Service Usage: Lower average monthly long distance charges and data downloads.
-  - Customer Service : Fewer total customer service requests and product/service issues reported.
-
-
-**Cluster 1: Moderate User**
-
-  - Average Monthly Charges: Moderate monthly charges.
-  - Tenure: Short to moderate tenure.
-  - Service Usage: Moderate usage of long distance and data services.
-  - Customer Service: Moderate number of customer service requests and issues reported.
-
-**Cluster 2: High Roller**
-
-  - Average Monthly Charges: Highest monthly charges.
-  - Tenure: Longest tenure.
-  - Service Usage: Highest usage of long distance and data services.
-  - Customer Service : More customer service requests and issues reported. 
   
 
 
