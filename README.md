@@ -131,15 +131,27 @@ print(cluster_means.to_markdown(numalign="center", stralign="center"))
 ![Cluster Segmentation illustrated](/images/Customer_Segmentation.png)
 
 
-### Conclusions
+## Conclusions
 
+### Cluster 0: Basic Profile
+
+This customer persona is typically a low-spender and is looking for essential services with value. They have an average tenure of 30 months and an average monthly bill of $23. They eschew higher-value add-on features such as Internet, Data, Streaming content, or multiple lines of service. They are on contract more likely than not at 64%. 
+
+### Cluster 1: Long Tenured, Premium Features and Spending.
+
+This customer is typically married, has a tenure of 55 months on average, and has the highest monthly bill at $90. They will likely have subscribed to streaming services, premium support, and multiple lines. They are also most likely to have 1- or 2- year contracts. 
+
+### Cluster 2: High Propensity Customer
+
+This customer is typically a single person, has the lowest tenure amongst the 3 clusters, and is likelier to have a month-to-month plan. They have a higher monthly bill than the basic customer, have an Internet plan, and are voracious Data Users. They also have the highest service issues among the 3 clusters.
+  
   
 
 
 ### Summary
 
 <p> 
-These clusters provide a good starting point for understanding the different customer segments within the telecom company's customer base. The company could use this information to tailor marketing strategies, customer service approaches, or product offerings to better meet the needs of each segment.
+These revised clusters accurately represent the customer segments within the telecom company's customer base. The company could use this information to tailor marketing strategies, customer service approaches, or product offerings to meet each segment's needs better.
 </p>
 
 
