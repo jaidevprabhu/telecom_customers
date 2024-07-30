@@ -1,8 +1,6 @@
 # Profiling Customer groups for Segmentation
 
-The data provided contains information on customers' purchasing and usage behavior with telecom products. The project will use this to create customer group profiles to better understand customer behavior, which could be used in a marketing campaign.
-
-
+The data provided contains information on customers' purchasing and usage behavior with telecom products. The project will use this to create customer group profiles to better understand customer behavior, which could be used to develop customer segments and in marketing campaigns.
 
 ```python
 # Read the CSV file into a DataFrame
