@@ -23,16 +23,16 @@ print(df.head().to_markdown(index=False, numalign="left", stralign="center"))
 
 ### Data Investigation
 
-The data contain information about customer demographics, service usage, charges, and a churn indicator. 
+The data contains information about customer demographics, service usage, charges, and a churn indicator. 
 
 
 ### Data Cleaning
 
- There are missing values in some columns, and many columns are already in a numeric format, which is suitable for PCA.  
+ There are missing values in some columns, but many columns are already in a numeric format, which is suitable for PCA.  
   
 ### Columns to drop
 
-  But there are some columns that capture same information in a different manner and some columns with lots of NaN's. 
+  There are some columns that capture same information in a different manner and some columns with lots of NaN's. 
   We will exclude these features from the clustering analysis.
 
   - '**Customer ID**' (irrelevant to consideration here)
@@ -57,7 +57,7 @@ df_pca_cluster = df.drop(cols_to_drop, axis = 1, inplace = True)
 
 ### Converting categorical data
 
-We will convert the remaining object columns to numeric using one-hot encoding, from the sklearn package. We drop the first category that enables us to view the variance from columns with > 1 category.
+We will convert the remaining object columns to numeric using one-hot encoding method available from the sklearn package. We drop the first category that enables us to view the variance from columns with > 1 category.
 
 ```python
 # Get all object columns
@@ -110,9 +110,9 @@ for i in range(1, 11):
 # Apply K-means clustering with the optimal number of clusters
 optimal_k = 3  
 kmeans = KMeans(
-    n_clusters=optimal_k, 
+    n_clusters = optimal_k, 
     n_init = 10, # To get rid of a pesky future warning
-    random_state=42
+    random_state = 42
 )
 cluster_labels = kmeans.fit_predict(pca_result)
 df_pca_cluster['Cluster'] = cluster_labels
@@ -124,39 +124,40 @@ Here's a summary of the average characteristics of each cluster:
 # Print the results
 print(cluster_means.to_markdown(numalign="left", stralign="center"))
 
-| Cluster   | Number of Referrals   | Tenure in Months   | Avg Monthly Long Distance Charges   | Avg Monthly GB Download   | Monthly Charge   | Total Regular Charges   | Total Refunds   | Total Extra Data Charges   | Total Long Distance Charges   | Age   | Number of Dependents   | Total Customer Svc Requests   | Product/Service Issues Reported   | Phone Service_Yes   | Multiple Lines_Yes   | Internet Service_Yes   | Online Security_Yes   | Online Backup_Yes   | Device Protection Plan_Yes   | Premium Tech Support_Yes   | Streaming TV_Yes   | Streaming Movies_Yes   | Streaming Music_Yes   | Unlimited Data_Yes   | Contract_One Year   | Contract_Two Year   | Paperless Billing_Yes   | Payment Method_Credit Card   | Payment Method_Mailed Check   | Gender_Male   | Married_Yes   |
-|:----------|:----------------------|:-------------------|:------------------------------------|:--------------------------|:-----------------|:------------------------|:----------------|:---------------------------|:------------------------------|:------|:-----------------------|:------------------------------|:----------------------------------|:--------------------|:---------------------|:-----------------------|:----------------------|:--------------------|:-----------------------------|:---------------------------|:-------------------|:-----------------------|:----------------------|:---------------------|:--------------------|:--------------------|:------------------------|:-----------------------------|:------------------------------|:--------------|:--------------|
-| 0         | 2.36                  | 30.14              | 24.69                               | 1.58                      | 23.29            | 704.91                  | 1.73            | 11.04                      | 748.25                        | 43.09 | 0.78                   | 0.98                          | 0.15                              | 0.98                | 0.21                 | 0.08                   | 0.03                  | 0.02                | 0.01                         | 0.02                       | 0                  | 0                      | 0                     | 0.02                 | 0.24                | 0.4                 | 0.29                    | 0.61                         | 0.09                          | 0.51          | 0.51          |
-| 1         | 3.29                  | 55.81              | 25.2                                | 28.77                     | 90.15            | 5015.53                 | 2.37            | 672.66                     | 1379.97                       | 46.61 | 0.57                   | 1.06                          | 0.2                               | 0.94                | 0.69                 | 1                      | 0.57                  | 0.68                | 0.7                          | 0.59                       | 0.72               | 0.74                   | 0.67                  | 0.54                 | 0.33                | 0.46                | 0.67                    | 0.38                         | 0.02                          | 0.51          | 0.74          |
-| 2         | 0.76                  | 16.41              | 20.39                               | 25.89                     | 69.99            | 1114.09                 | 1.79            | 131.94                     | 287.1                         | 48.26 | 0.23                   | 1.73                          | 0.47                              | 0.84                | 0.34                 | 1                      | 0.22                  | 0.28                | 0.26                         | 0.22                       | 0.34               | 0.34                   | 0.31                  | 0.46                 | 0.13                | 0.06                | 0.7                     | 0.28                         | 0.06                          | 0.5           | 0.28          |
+|  Cluster  |  Number of Referrals  |  Tenure in Months  |  Avg Monthly Long Distance Charges  |  Avg Monthly GB Download  |  Monthly Charge  |  Total Regular Charges  |  Total Refunds  |  Total Extra Data Charges  |  Total Long Distance Charges  |  Age  |  Number of Dependents  |  Total Customer Svc Requests  |  Product/Service Issues Reported  |  Phone Service_Yes  |  Multiple Lines_Yes  |  Internet Service_Yes  |  Online Security_Yes  |  Online Backup_Yes  |  Device Protection Plan_Yes  |  Premium Tech Support_Yes  |  Streaming TV_Yes  |  Streaming Movies_Yes  |  Streaming Music_Yes  |  Unlimited Data_Yes  |  Contract_One Year  |  Contract_Two Year  |  Paperless Billing_Yes  |  Payment Method_Credit Card  |  Payment Method_Mailed Check  |  Gender_Male  |  Married_Yes  |
+|:---------:|:---------------------:|:------------------:|:-----------------------------------:|:-------------------------:|:----------------:|:-----------------------:|:---------------:|:--------------------------:|:-----------------------------:|:-----:|:----------------------:|:-----------------------------:|:---------------------------------:|:-------------------:|:--------------------:|:----------------------:|:---------------------:|:-------------------:|:----------------------------:|:--------------------------:|:------------------:|:----------------------:|:---------------------:|:--------------------:|:-------------------:|:-------------------:|:-----------------------:|:----------------------------:|:-----------------------------:|:-------------:|:-------------:|
+|     0     |         2.36          |       30.14        |                24.69                |           1.58            |      23.29       |         704.91          |      1.73       |           11.04            |            748.25             | 43.09 |          0.78          |             0.98              |               0.15                |        0.98         |         0.21         |          0.08          |         0.03          |        0.02         |             0.01             |            0.02            |         0          |           0            |           0           |         0.02         |        0.24         |         0.4         |          0.29           |             0.61             |             0.09              |     0.51      |     0.51      |
+|     1     |         3.29          |       55.81        |                25.2                 |           28.77           |      90.15       |         5015.53         |      2.37       |           672.66           |            1379.97            | 46.61 |          0.57          |             1.06              |                0.2                |        0.94         |         0.69         |           1            |         0.57          |        0.68         |             0.7              |            0.59            |        0.72        |          0.74          |         0.67          |         0.54         |        0.33         |        0.46         |          0.67           |             0.38             |             0.02              |     0.51      |     0.74      |
+|     2     |         0.76          |       16.41        |                20.39                |           25.89           |      69.99       |         1114.09         |      1.79       |           131.94           |             287.1             | 48.26 |          0.23          |             1.73              |               0.47                |        0.84         |         0.34         |           1            |         0.22          |        0.28         |             0.26             |            0.22            |        0.34        |          0.34          |         0.31          |         0.46         |        0.13         |        0.06         |           0.7           |             0.28             |             0.06              |      0.5      |     0.28      |
 ```
 
-![Cluster Segmentation illustrated] (images/Customer_Segmentation.png)
+![Cluster Segmentation illustrated](/images/Customer_Segmentation.png)
 
 
 ### Conclusions
 
-**Cluster 0: Newer Customers with Low Usage**
+**Cluster 0: Basic User**
 
-  - These customers have been with the company for a shorter duration.
-  - They have low average monthly long distance charges and GB download.
-  - They rarely have multiple lines or premium tech support.
-  - They are less likely to have streaming services or unlimited data.
-  - They are more likely to be on month-to-month contracts.
+  - Average Monthly Charges: Lower compared to other clusters.
+  - Tenure: Shorter tenure in months.
+  - Service Usage: Lower average monthly long distance charges and data downloads.
+  - Customer Service : Fewer total customer service requests and product/service issues reported.
 
-**Cluster 1: Moderate Tenure, Moderate Usage**
 
-  - These customers have a moderate tenure with the company.
-  - They have moderate usage of long distance and data services.
-  - They are more likely to have internet service, but less likely to have additional features like online security or device protection.
-  - They are mostly on month-to-month contracts.
+**Cluster 1: Moderate User**
 
-**Cluster 2: Long-Term Customers with High Usage**
+  - Average Monthly Charges: Moderate monthly charges.
+  - Tenure: Short to moderate tenure.
+  - Service Usage: Moderate usage of long distance and data services.
+  - Customer Service: Moderate number of customer service requests and issues reported.
 
-  - These customers have been with the company for the longest time.
-  - They have the highest usage of long distance andata services.
-  - They are more likely to have multiple lines, premium tech support, and staming services.
-  - They are more likely to have unlimited data and be on longer-term contracts.
+**Cluster 2: High Roller**
+
+  - Average Monthly Charges: Highest monthly charges.
+  - Tenure: Longest tenure.
+  - Service Usage: Highest usage of long distance and data services.
+  - Customer Service : More customer service requests and issues reported. 
+  
 
 
 ### Summary
